@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -43,15 +43,15 @@ namespace DDR
 
                 if (++counter >= blocksize || j >= _inputs.Count - 1)
                 {
-                    km[blockIndex] = new KolmogorovModel(blockinput, blocktarget, new int[] { 3,3,3,3,3 });
+                    km[blockIndex] = new KolmogorovModel(blockinput, blocktarget, new int[] { 6,6,6,6,6 });
                     int NLeaves = 12;
                     int[] linearBlocksPerRootInput = new int[NLeaves];
                     for (int m = 0; m < NLeaves; ++m)
                     {
-                        linearBlocksPerRootInput[m] = 32;
+                        linearBlocksPerRootInput[m] = 16;
                     }
                     km[blockIndex].GenerateInitialOperators(NLeaves, linearBlocksPerRootInput);
-                    km[blockIndex].BuildRepresentation(100, 0.05, 0.05);
+                    km[blockIndex].BuildRepresentation(500, 0.01, 0.01);
                     Console.WriteLine("Modelled to actual output correlation koeff {0:0.00}", km[blockIndex].ComputeCorrelationCoeff());
  
                     blockinput.Clear();
